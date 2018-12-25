@@ -301,3 +301,13 @@ func (tc *testExpressionsSuite) TestMaxValueExprRestore(c *C) {
 	}
 	RunNodeRestoreTest(c, testCases, "alter table posts add partition ( partition p1 values less than %s)", extractNodeFunc)
 }
+
+func (tc *testExpressionsSuite) TestPositionExprRestore(c *C) {
+	testCases := []NodeRestoreTestCase{
+		{"position(a IN b)", "position(a IN b)"},
+	}
+	extractNodeFunc := func(node Node) Node {
+		return node.(*SelectStmt).Fields.Fields[0].Expr
+	}
+	RunNodeRestoreTest(c, testCases, "select %s", extractNodeFunc)
+}

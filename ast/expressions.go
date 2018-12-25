@@ -898,7 +898,8 @@ type PositionExpr struct {
 
 // Restore implements Node interface.
 func (n *PositionExpr) Restore(ctx *RestoreCtx) error {
-	return errors.New("Not implemented")
+	ctx.WriteKeyWord("POSITION")
+	return nil
 }
 
 // Format the ExprNode into a Writer.
